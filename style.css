@@ -1,0 +1,123 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.calculator-conteiner {
+    display: grid;
+    width: 350px;
+    grid-template-areas: "screen"
+                         "buttons";   ;
+}
+
+.screen {
+    background-color: rgba(0, 0, 0, 0.867);
+    width: 350px;
+    grid-area: screen;
+}
+
+.screen__text {
+    color: white;
+    font-size: 25px;
+    text-align: right;
+    margin-right: 4px;
+}
+
+/* #region buttons */
+.buttom {
+    border: 2px solid black;
+    margin: 0;
+    padding: 15px 8px;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    font-size: 35px;
+    background-color: #d8d9db;
+}
+
+.buttom-oper {
+    background-color: #df974c;
+    color: #fff;
+}
+
+.screen-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "clear clear   del     div"
+                         "n7    n8      n9       mult"
+                         "n4    n5      n6       minus"
+                         "n1    n2      n3       plus"
+                         "nzero nzero   nzero    equal";
+    grid-area: buttons;
+}
+
+.clear {
+    grid-area: clear;
+}
+
+.delete {
+    grid-area: del;
+}
+
+.division {
+    grid-area: div;
+}
+
+.seven {
+    grid-area: n7;
+}
+
+.eight {
+    grid-area: n8;
+}
+
+.nine {
+    grid-area: n9;
+}
+
+.multiply {
+    grid-area: mult;
+}
+
+.four {
+    grid-area: n4;
+}
+
+.five {
+    grid-area: n5;
+}
+
+.six {
+    grid-area: n6;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.one {
+    grid-area: n1;
+}
+
+.two {
+    grid-area: n2;
+}
+
+.three {
+    grid-area: n3;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.zero {
+    grid-area: nzero;
+}
+
+.equal {
+    grid-area: equal;
+}
+
+/* #endregion */
