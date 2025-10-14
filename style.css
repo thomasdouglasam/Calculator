@@ -1,3 +1,7 @@
+:root {
+    --calulator-w-size: 300px;
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -5,14 +9,14 @@ html {
 
 .calculator-conteiner {
     display: grid;
-    width: 350px;
+    width: var(--calulator-w-size);
     grid-template-areas: "screen"
                          "buttons";   ;
 }
 
 .screen {
     background-color: rgba(0, 0, 0, 0.867);
-    width: 350px;
+    width: var(--calulator-w-size);
     grid-area: screen;
 }
 
@@ -35,9 +39,17 @@ html {
     background-color: #d8d9db;
 }
 
+.buttom:hover {
+    background-color: #edecec;
+}
+
 .buttom-oper {
     background-color: #df974c;
     color: #fff;
+}
+
+.buttom-oper:hover {
+      background-color: #eba65d;
 }
 
 .screen-buttons {
