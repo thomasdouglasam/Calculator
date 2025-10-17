@@ -1,5 +1,5 @@
 :root {
-    --calulator-w-size: 300px;
+    --calculator-w-size: 300px;
 }
 
 html {
@@ -9,18 +9,19 @@ html {
 
 .calculator-conteiner {
     display: grid;
-    width: var(--calulator-w-size);
+    width: var(--calculator-w-size);
     grid-template-areas: "screen"
                          "buttons";   ;
 }
 
 .screen {
     background-color: rgba(0, 0, 0, 0.867);
-    width: var(--calulator-w-size);
+    width: var(--calculator-w-size);
     grid-area: screen;
 }
 
 .screen__text {
+    font-family: monospace;
     color: white;
     font-size: 25px;
     text-align: right;
