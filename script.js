@@ -1,79 +1,100 @@
-const screen = document.querySelector(".screen__text");
-const clear = document.querySelector(".clear");
-const deletebutton = document.querySelector(".delete");
-const zeroButton = document.querySelector(".zero");
-const oneButton = document.querySelector(".one");
-const twoButton = document.querySelector(".two");
-const threeButton = document.querySelector(".three");
-const fourButton = document.querySelector(".four");
-const fiveButton = document.querySelector(".five");
-const sixButton = document.querySelector(".six");
-const sevenButton = document.querySelector(".seven");
-const eightButton = document.querySelector(".eight");
-const nineButton = document.querySelector(".nine");
+let buffer = "0";
+let previousOperator = null;
+let runningTotal = 0;
+let screen = document.querySelector('.screen__text');
 
-let input = "";
 
-clear.addEventListener("click", function () {
-    screen.innerText = "0";
-    input = "";
-})
-
-deletebutton.addEventListener("click", function() {
-    if (input.length <= 1) {
-        screen.innerText = "0";
-        input = "";
+function handleNumber (number) {
+    if (buffer === "0") {
+        buffer = number;
     } else {
-        let newValue = input.slice(0, -1);
-        input = newValue;
-        screen.innerText = input;
+        buffer += number;
     }
-})
+}
 
-zeroButton.addEventListener("click", function () {
-    if (input.length >= 1 ) {
-        input += "0";
-        screen.innerText = input;
+function handleMath (value) {
+ 
+    if (buffer === "0") {
+        return;
     }
-})
+    
+    const intBuffer = parseInt(buffer);
 
-oneButton.addEventListener("click", function () {
-    input += 1;
-    screen.innerText = input;
-})
+    if (runningTotal === 0) {
+        runningTotal = intBuffer;
+    } else {
+        flushOperation(intBuffer);
+    }
 
-twoButton.addEventListener("click", function () {
-    input += 2;
-    screen.innerText = input;
-})
+    previousOperator = value;
+    buffer = "0";
 
-threeButton.addEventListener("click", function () {
-    input += 3;
-    screen.innerText = input;
-})
+}
 
-fourButton.addEventListener("click", function () {
-    input += 4;
-    screen.innerText = input;
-})
+function flushOperation (intBuffer) {
+    if (previousOperator === "+") {
+        runningTotal += intBuffer;
+    } else if (previousOperator === "-") {
+        runningTotal -= intBuffer;
+    } else if (previousOperator === "×") {
+        runningTotal *= intBuffer;
+    } else if (previousOperator === "÷") {
+        runningTotal /= intBuffer;
+    }
+}
 
-fiveButton.addEventListener("click", function () {
-    input += 5;
-    screen.innerText = input;
-})
-sixButton.addEventListener("click", function () {
-    input += 6;
-    screen.innerText = input;
-})
-sevenButton.addEventListener("click", function () {
-    input += 7;
-    screen.innerText = input;
-})
-eightButton.addEventListener("click", function () {
-    input += 8;
-    screen.innerText = input;
-})
-nineButton.addEventListener("click", function () {
-    input += 9;
-    screen.innerText = input;
-})
+function handleSymbol (symbol) {
+    switch (symbol) {
+        case "C":
+            buffer = "0";
+            break;
+        case "←":
+            if (buffer.length === 1) {
+                buffer = "0";
+            } else {
+                buffer = buffer.substring(0, buffer.length - 1);
+            }
+            break;
+        case "=":
+            if (previousOperator === null) {
+                return;
+            }
+            flushOperation(parseInt(buffer));
+            buffer = "" + runningTotal;
+            previousOperator = null;
+            runningTotal = 0;
+            break;
+        case "+":
+        case "-":
+        case "×":
+        case "÷":
+            handleMath(symbol);
+            break;
+    }
+    console.log('Symbol')
+}
+
+function buttonClick (value) {
+    if (isNaN(parseInt(value))) {
+        handleSymbol(value);
+    } else {
+        handleNumber(value);
+    }
+
+    reRender();
+}
+
+function init () {
+    console.log("works")
+    document
+    .querySelector('.calc-buttons')
+    .addEventListener("click", function (event) {
+        buttonClick(event.target.innerText);
+    })
+}
+
+function reRender () {
+    screen.innerText = buffer;
+}
+
+init();
